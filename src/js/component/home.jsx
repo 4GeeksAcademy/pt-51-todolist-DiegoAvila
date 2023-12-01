@@ -1,25 +1,64 @@
-import React from "react";
 
-//include images into your bundle
-import rigoImage from "../../img/rigo-baby.jpg";
+import React, { useState} from "react";
 
 //create your first component
 const Home = () => {
+	
+	const [entrada, setEntrada] = useState ("")
+	const [contenido, setContenido] = useState(["hola","adios"])
+
+	function capturarEntrada(event) {
+		setEntrada(event.target.value)
+	}
+	function capturarContenido(event) {
+		if (event.keyCode===13){
+			setContenido(contenido.concat(entrada))
+		}
+		
+		
+	}
+	// const mostrarCerrar = ""
+	// function ocultarCerrar() {
+	// 	mostrarCerrar = "hidden"
+	// }
+	// const handleRemoveTask = (task) => {
+	// 	// Elimina la tarea del estado
+	// 	setTasks(tasks.filter((t) => t !== task));
+	//   };
+	const [contenidos, setContenidos] = useState([])
+	const eliminarDato = (contenido) => { 
+		setContenidos(contenidos.filter((i) => i !== contenido))
+	}
+
+{/* <ul>
+        {tasks.map((task) => (
+          <li key={task}>
+            {task}
+            <button onClick={() => handleRemoveTask(task)}>
+              Eliminar
+            </button>
+          </li>
+        ))}
+      </ul> */}
+
+
+	const listaContenido = contenido.map((elemento, index) =>
+ 	    <li key={index}>
+   	 		{elemento}
+			<button type="button" className={`btn-close`} aria-label="Close" onClick={() => eliminarDato(index)}></button>
+  	 	</li>
+	 );
+  
+	
 	return (
-		<div className="text-center">
-			<h1 className="text-center mt-5">Hello Rigo!</h1>
-			<p>
-				<img src={rigoImage} />
-			</p>
-			<a href="#" className="btn btn-success">
-				If you see this green button... bootstrap is working...
-			</a>
-			<p>
-				Made by{" "}
-				<a href="http://www.4geeksacademy.com">4Geeks Academy</a>, with
-				love!
-			</p>
+
+		<div className="w-50 mx-auto mt-5" onKeyDown={capturarContenido} >
+			<input type="text" className="form-control" onChange={capturarEntrada} />
+			<ul className="list-group list-group-flush">
+				{listaContenido}
+	  		</ul>
 		</div>
+		
 	);
 };
 
