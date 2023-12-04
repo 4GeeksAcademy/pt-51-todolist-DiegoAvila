@@ -10,3 +10,10 @@
     import 'relative/path/to/stylesheet.scss';
 
 */
+/* button.oculto{
+    visibility: hidden;
+    cursor: pointer;
+}
+button.oculto:hover{
+    visibility: visible;
+} */
